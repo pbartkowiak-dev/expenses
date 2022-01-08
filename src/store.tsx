@@ -1,4 +1,5 @@
 import { makeAutoObservable } from "mobx";
+import React from "react";
 
 export interface Expense {
   id: number;
@@ -32,6 +33,12 @@ class Store {
 
     this.newExpenseTitle = "";
     this.newExpenseAmount = "";
+  }
+
+  deleteExpense(id: number) {
+    setTimeout(() => {
+      this.expenses = this.expenses.filter((expense) => expense.id !== id);
+    });
   }
 }
 

@@ -1,11 +1,11 @@
 import React from "react";
-import { Box, styled, Typography } from "@mui/material";
+import { Box, Button, styled } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { store, Expense } from "../store";
+import { Expense, store } from "../store";
 import { observer } from "mobx-react";
 import { observable } from "mobx";
 
-const columns: GridColDef[] = [
+const columns: any[] = [
   { field: "title", headerName: "Title", flex: 1, hideable: false },
   {
     field: "amountPln",
@@ -22,9 +22,21 @@ const columns: GridColDef[] = [
   {
     field: "options",
     headerName: "Options",
+    type: "actions",
     minWidth: 150,
     sortable: false,
     hideable: false,
+    getActions: ({ id }: Expense) => {
+      return [
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={() => store.deleteExpense(id)}
+        >
+          Delete
+        </Button>,
+      ];
+    },
   },
 ];
 
