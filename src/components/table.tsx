@@ -1,10 +1,15 @@
 import React from "react";
 import { Box, Button, styled } from "@mui/material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridActionsColDef,
+  GridColDef,
+  GridRowParams,
+} from "@mui/x-data-grid";
 import { Expense, store } from "../store";
 import { observer } from "mobx-react";
 
-const columns: any[] = [
+const columns: (GridColDef | GridActionsColDef)[] = [
   { field: "title", headerName: "Title", flex: 1, hideable: false },
   {
     field: "amountPln",
@@ -25,7 +30,8 @@ const columns: any[] = [
     minWidth: 150,
     sortable: false,
     hideable: false,
-    getActions: ({ id }: Expense) => {
+    getActions: (params) => {
+      const id = params.id as number;
       return [
         <Button
           variant="outlined"
