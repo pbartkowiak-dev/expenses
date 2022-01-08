@@ -20,7 +20,24 @@ const validateGenericNumber = (fieldName: string, value: number) => {
   return "";
 };
 
-class Store {
+interface IStore {
+  expenses: Expense[];
+  newExpenseTitle: string;
+  newExpenseAmount: string;
+  newExpenseTitleError: string;
+  newExpenseAmountError: string;
+  euroValueError: string;
+  euroVal: string;
+  sum: number;
+  sumEuro: number;
+  validateTitle: () => void;
+  validateAmount: () => void;
+  validateEuroVal: () => void;
+  addExpense: () => void;
+  deleteExpense: (id: number) => void;
+}
+
+class Store implements IStore {
   expenses: Expense[] = [];
   newExpenseTitle = "";
   newExpenseAmount = "";
@@ -91,7 +108,7 @@ class Store {
       amountEur: Number((amountPln / euroVal).toFixed(2)),
     };
 
-    this.expenses.push(newExpense);
+    this.expenses = [...this.expenses, newExpense];
 
     this.newExpenseTitle = "";
     this.newExpenseAmount = "";
