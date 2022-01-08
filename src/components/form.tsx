@@ -3,15 +3,11 @@ import { Box, Button, styled, TextField, Typography } from "@mui/material";
 import { observer } from "mobx-react";
 import { store } from "../store";
 
-const StyledForm = styled("form")(() => ({
-  marginBottom: "20px",
-}));
-
 const FullWidthBox = styled(Box)(() => ({
   width: "100%",
   display: "flex",
   justifyContent: "space-between",
-  alignItems: "center",
+  alignItems: "flex-start",
 }));
 
 const InputBox = styled(Box)(() => ({
@@ -35,7 +31,7 @@ function Form(): JSX.Element {
   };
 
   return (
-    <StyledForm onSubmit={onSubmit}>
+    <form onSubmit={onSubmit}>
       <InputBox>
         <StyledTypography>Title of transaction</StyledTypography>
         <TextField
@@ -65,11 +61,11 @@ function Form(): JSX.Element {
             onChange={(event) => (store.newExpenseAmount = event.target.value)}
           />
         </InputBox>
-        <Button variant="outlined" type="submit">
+        <Button variant="outlined" type="submit" sx={{ minWidth: "150px" }}>
           Add
         </Button>
       </FullWidthBox>
-    </StyledForm>
+    </form>
   );
 }
 
