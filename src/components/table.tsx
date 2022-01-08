@@ -43,7 +43,7 @@ const columns: (GridColDef | GridActionsColDef)[] = [
 const StyledBox = styled(Box)(() => ({
   marginBottom: "20px",
   width: "100%",
-  height: 600,
+  height: 320,
 }));
 
 function Table(): JSX.Element {
@@ -52,8 +52,8 @@ function Table(): JSX.Element {
       <DataGrid
         rows={[...store.expenses]}
         columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10]}
+        pageSize={5}
+        rowsPerPageOptions={[5]}
       />
     </StyledBox>
   );
