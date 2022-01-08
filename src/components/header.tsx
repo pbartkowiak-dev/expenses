@@ -11,7 +11,7 @@ const StyledBox = styled(Box)(() => ({
   margin: "10px 0 30px",
 }));
 
-const StyledTypography = styled(Typography)(() => ({
+const EuroValueForm = styled(Box)(() => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "right",
@@ -34,18 +34,19 @@ export function Header(): JSX.Element {
           List of expenses
         </Typography>
         <Box>
-          <StyledTypography>
-            1 EUR ={" "}
+          <EuroValueForm>
+            <Typography>1 EUR = </Typography>
             <TextField
               inputProps={{ inputMode: "numeric" }}
               value={store.euroVal}
               error={!!store.euroValueError}
+              onBlur={() => store.validateEuroVal()}
               onChange={(event) => (store.euroVal = event.target.value)}
               size="small"
               sx={{ marginLeft: "5px", marginRight: "5px", width: "100px" }}
             />{" "}
-            PLN
-          </StyledTypography>
+            <Typography>PLN</Typography>
+          </EuroValueForm>
           <Error variant="caption">{store.euroValueError}</Error>
         </Box>
       </StyledBox>

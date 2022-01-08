@@ -43,6 +43,7 @@ function Form(): JSX.Element {
           error={!!store.newExpenseTitleError}
           helperText={store.newExpenseTitleError}
           value={store.newExpenseTitle}
+          onBlur={() => store.validateTitle()}
           onChange={(event) => (store.newExpenseTitle = event.target.value)}
         />
       </InputBox>
@@ -58,6 +59,7 @@ function Form(): JSX.Element {
             error={!!store.newExpenseAmountError}
             helperText={store.newExpenseAmountError}
             value={store.newExpenseAmount}
+            onBlur={() => store.validateAmount()}
             onChange={(event) => (store.newExpenseAmount = event.target.value)}
           />
         </InputBox>
