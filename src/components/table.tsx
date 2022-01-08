@@ -3,6 +3,7 @@ import { Box, styled, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { store, Expense } from "../store";
 import { observer } from "mobx-react";
+import { observable } from "mobx";
 
 const columns: GridColDef[] = [
   { field: "title", headerName: "Title", flex: 1, hideable: false },
@@ -27,25 +28,6 @@ const columns: GridColDef[] = [
   },
 ];
 
-interface Row extends Expense {
-  id: number;
-}
-
-const rows: Row[] = [
-  {
-    id: 1,
-    title: "New book about Rust",
-    amountPln: 100,
-    amountEur: 22.82,
-  },
-  {
-    id: 2,
-    title: "Snacks for a footbal match",
-    amountPln: 20,
-    amountEur: 1.84,
-  },
-];
-
 interface Props {}
 
 const StyledBox = styled(Box)(() => ({
@@ -58,7 +40,7 @@ function Table(props: Props): JSX.Element {
   return (
     <StyledBox>
       <DataGrid
-        rows={rows}
+        rows={[...store.expenses]}
         columns={columns}
         pageSize={10}
         rowsPerPageOptions={[10]}
@@ -67,4 +49,4 @@ function Table(props: Props): JSX.Element {
   );
 }
 
-export default Table;
+export default observer(Table);
