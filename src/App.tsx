@@ -4,6 +4,7 @@ import { Container } from "@mui/material";
 import Header from "./components/header";
 import Form from "./components/form";
 import Table from "./components/table";
+import Sum from "./components/sum";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Header />
       <Form />
       <Table />
+      <Sum />
     </Container>
   );
 }

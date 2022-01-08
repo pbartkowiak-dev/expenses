@@ -1,23 +1,57 @@
 import React from "react";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, styled, TextField, Typography } from "@mui/material";
 
 interface Props {}
 
+const StyledBox = styled(Box)(() => ({
+  marginBottom: "20px",
+}));
+
+const FullWidthBox = styled(Box)(() => ({
+  width: "100%",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+}));
+
+const InputBox = styled(Box)(() => ({
+  display: "flex",
+  alignItems: "flex-end",
+  marginBottom: "10px",
+}));
+
+const StyledTypography = styled(Typography)(() => ({
+  minWidth: "190px",
+  textAlign: "left",
+}));
+
 function Form(props: Props): JSX.Element {
   return (
-    <Box>
-      <Box sx={{ display: "flex" }}>
-        <Typography>Title of transaction</Typography>
-        <TextField id="title" label="Outlined" variant="outlined" />
-      </Box>
-      <Box sx={{ display: "flex" }}>
-        <Box sx={{ display: "flex" }}>
-          <Typography>Amount (in PLN)</Typography>
-          <TextField id="amount" label="Outlined" variant="outlined" />
-        </Box>
-        <Button>Add</Button>
-      </Box>
-    </Box>
+    <StyledBox>
+      <InputBox>
+        <StyledTypography>Title of transaction</StyledTypography>
+        <TextField
+          id="title"
+          label="Title"
+          variant="outlined"
+          size="small"
+          sx={{ marginLeft: 5 }}
+        />
+      </InputBox>
+      <FullWidthBox>
+        <InputBox>
+          <StyledTypography>Amount (in PLN)</StyledTypography>
+          <TextField
+            id="amount"
+            label="Amount"
+            variant="outlined"
+            size="small"
+            sx={{ marginLeft: 5 }}
+          />
+        </InputBox>
+        <Button variant="outlined">Add</Button>
+      </FullWidthBox>
+    </StyledBox>
   );
 }
 

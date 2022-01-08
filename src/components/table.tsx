@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, styled, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
 const columns: GridColDef[] = [
@@ -49,17 +49,22 @@ const rows: Row[] = [
 
 interface Props {}
 
+const StyledBox = styled(Box)(() => ({
+  marginBottom: "20px",
+  width: "100%",
+  height: 600,
+}));
+
 function Table(props: Props): JSX.Element {
   return (
-    <Box sx={{ height: 300, width: "100%" }}>
+    <StyledBox>
       <DataGrid
         rows={rows}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
+        pageSize={10}
+        rowsPerPageOptions={[10]}
       />
-      <Typography align="left">Sum: 122.55 PLN (27,96 EUR)</Typography>
-    </Box>
+    </StyledBox>
   );
 }
 
