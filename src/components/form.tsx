@@ -3,17 +3,26 @@ import { Box, Button, styled, TextField, Typography } from "@mui/material";
 import { observer } from "mobx-react";
 import { store } from "../store";
 
-const FullWidthBox = styled(Box)(() => ({
+const FullWidthBox = styled(Box)(({ theme }) => ({
   width: "100%",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "flex-start",
+  [theme.breakpoints.down("md")]: {
+    flexDirection: "column",
+    marginBottom: "20px",
+  },
 }));
 
-const InputBox = styled(Box)(() => ({
+const InputBox = styled(Box)(({ theme }) => ({
   display: "flex",
   marginBottom: "10px",
   height: "65px",
+  [theme.breakpoints.down("md")]: {
+    flexDirection: "column",
+    marginBottom: "70px",
+    width: "100%",
+  },
 }));
 
 const StyledTypography = styled(Typography)(() => ({
@@ -46,7 +55,10 @@ function Form(): JSX.Element {
           label="Title"
           variant="outlined"
           size="small"
-          sx={{ marginLeft: 5, width: "350px" }}
+          sx={{
+            marginLeft: { sm: 0, md: "15px" },
+            width: { sm: "100%", md: "350px" },
+          }}
           error={!!store.newExpenseTitleError}
           helperText={store.newExpenseTitleError}
           value={store.newExpenseTitle}
@@ -62,7 +74,10 @@ function Form(): JSX.Element {
             label="Amount"
             variant="outlined"
             size="small"
-            sx={{ marginLeft: 5, width: "350px" }}
+            sx={{
+              marginLeft: { sm: 0, md: "15px" },
+              width: { sm: "100%", md: "350px" },
+            }}
             error={!!store.newExpenseAmountError}
             helperText={store.newExpenseAmountError}
             value={store.newExpenseAmount}

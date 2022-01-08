@@ -3,18 +3,26 @@ import { Box, styled, TextField, Typography } from "@mui/material";
 import { observer } from "mobx-react";
 import { store } from "../store";
 
-const StyledBox = styled(Box)(() => ({
+const StyledBox = styled(Box)(({ theme }) => ({
   width: "100%",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "flex-end",
   margin: "10px 0 30px",
+  [theme.breakpoints.down("md")]: {
+    flexDirection: "column",
+    alignItems: "flex-start",
+    marginBottom: "0px",
+  },
 }));
 
-const EuroValueForm = styled(Box)(() => ({
+const EuroValueForm = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "right",
+  [theme.breakpoints.down("md")]: {
+    justifyContent: "left",
+  },
 }));
 
 const Error = styled(Typography)(({ theme }) => ({
