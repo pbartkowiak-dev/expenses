@@ -28,6 +28,13 @@ function Form(): JSX.Element {
   const onSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     store.addExpense();
+
+    const titleInpt = document.getElementById("title");
+    if (titleInpt) {
+      (titleInpt as HTMLInputElement).focus();
+    }
+
+    store.clearForm();
   };
 
   return (

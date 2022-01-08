@@ -35,6 +35,7 @@ interface IStore {
   validateEuroVal: () => void;
   addExpense: () => void;
   deleteExpense: (id: number) => void;
+  clearForm: () => void;
 }
 
 class Store implements IStore {
@@ -109,9 +110,14 @@ class Store implements IStore {
     };
 
     this.expenses = [...this.expenses, newExpense];
+  }
 
+  clearForm() {
     this.newExpenseTitle = "";
     this.newExpenseAmount = "";
+    this.newExpenseTitleError = "";
+    this.newExpenseAmountError = "";
+    this.euroValueError = "";
   }
 
   deleteExpense(id: number) {
