@@ -1,12 +1,7 @@
 import React from "react";
 import { Box, Button, styled } from "@mui/material";
-import {
-  DataGrid,
-  GridActionsColDef,
-  GridColDef,
-  GridRowParams,
-} from "@mui/x-data-grid";
-import { Expense, store } from "../store";
+import { DataGrid, GridActionsColDef, GridColDef } from "@mui/x-data-grid";
+import { store } from "../store";
 import { observer } from "mobx-react";
 
 const columns: (GridColDef | GridActionsColDef)[] = [

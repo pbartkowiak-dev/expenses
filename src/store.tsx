@@ -1,5 +1,4 @@
 import { makeAutoObservable } from "mobx";
-import React from "react";
 
 export interface Expense {
   id: number;
@@ -20,6 +19,14 @@ class Store {
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  get sum() {
+    return this.expenses.reduce((total, { amountPln }) => total + amountPln, 0);
+  }
+
+  get sumEuro() {
+    return Number((this.sum / this.euroVal).toFixed(2));
   }
 
   validateTitle() {

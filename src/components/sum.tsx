@@ -1,18 +1,24 @@
 import React from "react";
-import { Box, styled, Typography } from "@mui/material";
+import { styled, Typography } from "@mui/material";
+import { observer } from "mobx-react";
+import { store } from "../store";
 
 const StyledTypography = styled(Typography)(() => ({
   marginBottom: "10px",
 }));
 
-interface Props {}
+function Sum(): JSX.Element {
+  const { sum, sumEuro } = store;
 
-function Sum(props: Props): JSX.Element {
   return (
-    <StyledTypography align="left">
-      Sum: 122.55 PLN (27,96 EUR)
-    </StyledTypography>
+    <>
+      {sum > 0 && (
+        <StyledTypography align="left">
+          Sum: {sum.toFixed(2)} PLN ({sumEuro.toFixed(2)} EUR)
+        </StyledTypography>
+      )}
+    </>
   );
 }
 
-export default Sum;
+export default observer(Sum);
