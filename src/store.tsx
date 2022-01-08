@@ -5,6 +5,7 @@ export interface Expense {
   id: number;
   title: string;
   amountPln: number;
+  amountEur: number;
 }
 
 class Store {
@@ -14,6 +15,8 @@ class Store {
 
   newExpenseTitleError = "";
   newExpenseAmountError = "";
+
+  euroVal = 4.55;
 
   constructor() {
     makeAutoObservable(this);
@@ -30,7 +33,7 @@ class Store {
       error = "Title is too long";
     }
     if (title.length < 5) {
-      error = "Title is too short";
+      error = "Title should have at least 5 characters";
     }
     this.newExpenseTitleError = error;
   }
@@ -68,6 +71,7 @@ class Store {
       id: new Date().getTime(),
       title,
       amountPln,
+      amountEur: Number((amountPln / this.euroVal).toFixed(2)),
     };
 
     this.expenses.push(newExpense);
