@@ -46,7 +46,7 @@ class Store {
   }
 
   validateAmount() {
-    const amount = Number(this.newExpenseAmount);
+    const amount = Number(this.newExpenseAmount.replaceAll(",", "."));
     let error = "";
 
     if (isNaN(amount)) {
@@ -62,7 +62,7 @@ class Store {
   }
 
   addExpense() {
-    const amountPln = Number(this.newExpenseAmount);
+    const amountPln = Number(this.newExpenseAmount.replaceAll(",", "."));
     const title = this.newExpenseTitle.trim();
 
     this.validateTitle();
