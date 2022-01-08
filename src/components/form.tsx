@@ -61,7 +61,12 @@ function Form(): JSX.Element {
             onChange={(event) => (store.newExpenseAmount = event.target.value)}
           />
         </InputBox>
-        <Button variant="outlined" type="submit" sx={{ minWidth: "150px" }}>
+        <Button
+          variant="contained"
+          disableElevation
+          type="submit"
+          sx={{ minWidth: "150px" }}
+        >
           Add
         </Button>
       </FullWidthBox>
