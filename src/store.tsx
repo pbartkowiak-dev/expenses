@@ -68,7 +68,7 @@ class Store implements IStore {
     if (!title) {
       error = "Title cannot be empty";
     }
-    if (title.length > 20) {
+    if (title.length > 50) {
       error = "Title is too long";
     }
     if (title.length < 5) {
