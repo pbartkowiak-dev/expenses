@@ -3,7 +3,6 @@ import { Box, Button, styled } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Expense, store } from "../store";
 import { observer } from "mobx-react";
-import { observable } from "mobx";
 
 const columns: any[] = [
   { field: "title", headerName: "Title", flex: 1, hideable: false },
@@ -40,15 +39,13 @@ const columns: any[] = [
   },
 ];
 
-interface Props {}
-
 const StyledBox = styled(Box)(() => ({
   marginBottom: "20px",
   width: "100%",
   height: 600,
 }));
 
-function Table(props: Props): JSX.Element {
+function Table(): JSX.Element {
   return (
     <StyledBox>
       <DataGrid

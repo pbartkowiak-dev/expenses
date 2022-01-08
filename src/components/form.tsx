@@ -3,8 +3,6 @@ import { Box, Button, styled, TextField, Typography } from "@mui/material";
 import { observer } from "mobx-react";
 import { store } from "../store";
 
-interface Props {}
-
 const StyledForm = styled("form")(() => ({
   marginBottom: "20px",
 }));
@@ -18,16 +16,19 @@ const FullWidthBox = styled(Box)(() => ({
 
 const InputBox = styled(Box)(() => ({
   display: "flex",
-  alignItems: "flex-end",
   marginBottom: "10px",
+  height: "65px",
 }));
 
 const StyledTypography = styled(Typography)(() => ({
   minWidth: "190px",
   textAlign: "left",
+  paddingBottom: "15px",
+  display: "flex",
+  alignItems: "center",
 }));
 
-function Form(props: Props): JSX.Element {
+function Form(): JSX.Element {
   const onSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     store.addExpense();
@@ -42,7 +43,9 @@ function Form(props: Props): JSX.Element {
           label="Title"
           variant="outlined"
           size="small"
-          sx={{ marginLeft: 5 }}
+          sx={{ marginLeft: 5, width: "350px" }}
+          error={!!store.newExpenseTitleError}
+          helperText={store.newExpenseTitleError}
           value={store.newExpenseTitle}
           onChange={(event) => (store.newExpenseTitle = event.target.value)}
         />
@@ -55,7 +58,9 @@ function Form(props: Props): JSX.Element {
             label="Amount"
             variant="outlined"
             size="small"
-            sx={{ marginLeft: 5 }}
+            sx={{ marginLeft: 5, width: "350px" }}
+            error={!!store.newExpenseAmountError}
+            helperText={store.newExpenseAmountError}
             value={store.newExpenseAmount}
             onChange={(event) => (store.newExpenseAmount = event.target.value)}
           />

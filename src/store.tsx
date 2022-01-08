@@ -5,28 +5,69 @@ export interface Expense {
   id: number;
   title: string;
   amountPln: number;
-  amountEur: number;
 }
 
 class Store {
   expenses: Expense[] = [];
-  newExpenseTitle: string = "";
-  newExpenseAmount: string = "";
+  newExpenseTitle = "";
+  newExpenseAmount = "";
+
+  newExpenseTitleError = "";
+  newExpenseAmountError = "";
 
   constructor() {
     makeAutoObservable(this);
   }
 
+  validateTitle() {
+    const title = this.newExpenseTitle.trim();
+    let error = "";
+
+    if (!title) {
+      error = "Title cannot be empty";
+    }
+    if (title.length > 20) {
+      error = "Title is too long";
+    }
+    if (title.length < 5) {
+      error = "Title is too short";
+    }
+    this.newExpenseTitleError = error;
+  }
+
+  validateAmount() {
+    const amount = Number(this.newExpenseAmount);
+    let error = "";
+
+    if (isNaN(amount)) {
+      error = "Amount has to be a correct number";
+    }
+    if (!amount) {
+      error = "Amount value is required";
+    }
+    if (amount % 1 && String(amount).split(".")[1].length > 2) {
+      error = "Only two decimal places are allowed";
+    }
+    this.newExpenseAmountError = error;
+  }
+
   addExpense() {
-    console.log("ad expense", this.newExpenseTitle, this.newExpenseAmount);
     const amountPln = Number(this.newExpenseAmount);
     const title = this.newExpenseTitle.trim();
+
+    this.validateTitle();
+    this.validateAmount();
+
+    const hasError = this.newExpenseTitleError || this.newExpenseAmountError;
+
+    if (hasError) {
+      return false;
+    }
 
     const newExpense: Expense = {
       id: new Date().getTime(),
       title,
       amountPln,
-      amountEur: amountPln * 0.22,
     };
 
     this.expenses.push(newExpense);

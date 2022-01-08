@@ -1,8 +1,6 @@
 import React from "react";
 import { Box, styled, Typography } from "@mui/material";
 
-interface Props {}
-
 const StyledBox = styled(Box)(() => ({
   width: "100%",
   display: "flex",
@@ -11,7 +9,7 @@ const StyledBox = styled(Box)(() => ({
   margin: "10px 0 30px",
 }));
 
-export function Header({}: Props): JSX.Element {
+export function Header(): JSX.Element {
   return (
     <header>
       <StyledBox>
