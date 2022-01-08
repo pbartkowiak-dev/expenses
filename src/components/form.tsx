@@ -1,9 +1,11 @@
 import React from "react";
 import { Box, Button, styled, TextField, Typography } from "@mui/material";
+import { observer } from "mobx-react";
+import { store } from "../store";
 
 interface Props {}
 
-const StyledBox = styled(Box)(() => ({
+const StyledForm = styled("form")(() => ({
   marginBottom: "20px",
 }));
 
@@ -26,8 +28,13 @@ const StyledTypography = styled(Typography)(() => ({
 }));
 
 function Form(props: Props): JSX.Element {
+  const onSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    store.addExpense();
+  };
+
   return (
-    <StyledBox>
+    <StyledForm onSubmit={onSubmit}>
       <InputBox>
         <StyledTypography>Title of transaction</StyledTypography>
         <TextField
@@ -36,6 +43,8 @@ function Form(props: Props): JSX.Element {
           variant="outlined"
           size="small"
           sx={{ marginLeft: 5 }}
+          value={store.newExpenseTitle}
+          onChange={(event) => (store.newExpenseTitle = event.target.value)}
         />
       </InputBox>
       <FullWidthBox>
@@ -47,12 +56,16 @@ function Form(props: Props): JSX.Element {
             variant="outlined"
             size="small"
             sx={{ marginLeft: 5 }}
+            value={store.newExpenseAmount}
+            onChange={(event) => (store.newExpenseAmount = event.target.value)}
           />
         </InputBox>
-        <Button variant="outlined">Add</Button>
+        <Button variant="outlined" type="submit">
+          Add
+        </Button>
       </FullWidthBox>
-    </StyledBox>
+    </StyledForm>
   );
 }
 
-export default Form;
+export default observer(Form);

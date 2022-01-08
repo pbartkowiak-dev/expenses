@@ -1,6 +1,8 @@
 import React from "react";
 import { Box, styled, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { store, Expense } from "../store";
+import { observer } from "mobx-react";
 
 const columns: GridColDef[] = [
   { field: "title", headerName: "Title", flex: 1, hideable: false },
@@ -25,11 +27,8 @@ const columns: GridColDef[] = [
   },
 ];
 
-interface Row {
+interface Row extends Expense {
   id: number;
-  title: string;
-  amountPln: number;
-  amountEur: number;
 }
 
 const rows: Row[] = [
