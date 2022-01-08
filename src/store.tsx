@@ -7,6 +7,19 @@ export interface Expense {
   amountEur: number;
 }
 
+const validateGenericNumber = (fieldName: string, value: number) => {
+  if (isNaN(value)) {
+    return `${fieldName} value has to be a correct number`;
+  }
+  if (!value) {
+    return `${fieldName} value is required`;
+  }
+  if (value % 1 && String(value).split(".")[1].length > 2) {
+    return "Only two decimal places are allowed";
+  }
+  return "";
+};
+
 class Store {
   expenses: Expense[] = [];
   newExpenseTitle = "";
@@ -14,8 +27,9 @@ class Store {
 
   newExpenseTitleError = "";
   newExpenseAmountError = "";
+  euroValueError = "";
 
-  euroVal = 4.55;
+  euroVal = "4.55";
 
   constructor() {
     makeAutoObservable(this);
@@ -26,7 +40,7 @@ class Store {
   }
 
   get sumEuro() {
-    return Number((this.sum / this.euroVal).toFixed(2));
+    return this.expenses.reduce((total, { amountEur }) => total + amountEur, 0);
   }
 
   validateTitle() {
@@ -47,26 +61,22 @@ class Store {
 
   validateAmount() {
     const amount = Number(this.newExpenseAmount.replaceAll(",", "."));
-    let error = "";
+    this.newExpenseAmountError = validateGenericNumber("Amount", amount);
+  }
 
-    if (isNaN(amount)) {
-      error = "Amount has to be a correct number";
-    }
-    if (!amount) {
-      error = "Amount value is required";
-    }
-    if (amount % 1 && String(amount).split(".")[1].length > 2) {
-      error = "Only two decimal places are allowed";
-    }
-    this.newExpenseAmountError = error;
+  validateEuroVal() {
+    const euroVal = Number(this.euroVal.replaceAll(",", "."));
+    this.euroValueError = validateGenericNumber("Euro", euroVal);
   }
 
   addExpense() {
     const amountPln = Number(this.newExpenseAmount.replaceAll(",", "."));
     const title = this.newExpenseTitle.trim();
+    const euroVal = Number(this.euroVal.replaceAll(",", "."));
 
     this.validateTitle();
     this.validateAmount();
+    this.validateEuroVal();
 
     const hasError = this.newExpenseTitleError || this.newExpenseAmountError;
 
@@ -78,7 +88,7 @@ class Store {
       id: new Date().getTime(),
       title,
       amountPln,
-      amountEur: Number((amountPln / this.euroVal).toFixed(2)),
+      amountEur: Number((amountPln / euroVal).toFixed(2)),
     };
 
     this.expenses.push(newExpense);
